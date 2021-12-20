@@ -1,0 +1,21 @@
+stages:
+  - build
+
+variables:
+  CONTAINER_IMAGE: ${DOCKER_HUB_USERNAME}/ci-dind
+
+# The image uses itself to build
+image: moreillon/ci-dind
+services:
+  - name: docker:19.03.12-dind
+
+build:
+  stage: build
+  tags:
+    - dind
+  before_script:
+    # Docker hub login
+    - echo "${DOCKER_HUB_PASSWORD}" | docker login --username ${DOCKER_HUB_USERNAME} --password-stdin
+  script:
+    - docker build -t ${CONTAINER_IMAGE} .
+    - docker push ${CONTAINER_IMAGE}

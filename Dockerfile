@@ -1,6 +1,6 @@
 FROM docker:19.03.12-dind
 
-# Installing AWS
+# AWS CLI
 ENV GLIBC_VER=2.34-r0
 RUN apk --update-cache add \
         binutils \
@@ -35,7 +35,7 @@ RUN apk --update-cache add \
 
 
 
-# Kubectl install
+# Kubectl
 ENV KUBE_LATEST_VERSION="v1.23.1"
 RUN apk add --update ca-certificates \
  && apk add -t deps \
