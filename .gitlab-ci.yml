@@ -3,7 +3,10 @@ stages:
 
 variables:
   CONTAINER_IMAGE: ${DOCKER_HUB_USERNAME}/ci-dind
-  CONTAINER_IMAGE_TAGGED: ${CONTAINER_IMAGE}:${CI_COMMIT_SHORT_SHA}
+  CONTAINER_TAG: ${CI_COMMIT_SHORT_SHA}
+  CONTAINER_IMAGE_TAGGED: ${CONTAINER_IMAGE}:${CONTAINER_TAG}
+  CONTAINER_IMAGE_AARCH64: ${CONTAINER_IMAGE}:aarch64
+  CONTAINER_IMAGE_AARCH64_TAGGED: ${CONTAINER_IMAGE}:aarch64-${CONTAINER_TAG}
 
 # The image uses itself to build
 image: moreillon/ci-dind
@@ -15,10 +18,21 @@ build:
   tags:
     - dind
   before_script:
-    # Docker hub login
     - echo "${DOCKER_HUB_PASSWORD}" | docker login --username ${DOCKER_HUB_USERNAME} --password-stdin
   script:
     - docker build -t ${CONTAINER_IMAGE} .
     - docker tag ${CONTAINER_IMAGE} ${CONTAINER_IMAGE_TAGGED}
     - docker push ${CONTAINER_IMAGE}
     - docker push ${CONTAINER_IMAGE_TAGGED}
+
+build-aarch64:
+  stage: build
+  tags:
+    - aarch64
+  before_script:
+    - echo "${DOCKER_HUB_PASSWORD}" | docker login --username ${DOCKER_HUB_USERNAME} --password-stdin
+  script:
+    - docker build -t ${CONTAINER_IMAGE_AARCH64} -f Dockerfile_aarch64 .
+    - docker tag ${CONTAINER_IMAGE_AARCH64} ${CONTAINER_IMAGE_AARCH64_TAGGED}
+    - docker push ${CONTAINER_IMAGE_AARCH64}
+    - docker push ${CONTAINER_IMAGE_AARCH64_TAGGED}
