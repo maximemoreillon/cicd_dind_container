@@ -5,7 +5,7 @@ variables:
   CONTAINER_IMAGE: ${DOCKER_HUB_USERNAME}/ci-dind
   CONTAINER_IMAGE_TAGGED: ${CONTAINER_IMAGE}:${CI_COMMIT_SHORT_SHA}
 
-# The image uses itself to build
+# The image uses itself to build itself
 image: moreillon/ci-dind
 services:
   - name: docker:19.03.12-dind

@@ -47,3 +47,6 @@ RUN apk add --update ca-certificates \
 
 # envsubts
 RUN apk add gettext
+
+# git
+RUN apk add git
