@@ -6,7 +6,8 @@ This is a container image for CI/CD jobs that involve building containers and de
 
 This image allows the use of the following commands:
 
-* docker
-* kubectl
-* envsubst
-* aws (x86 version only)
+- docker
+- kubectl
+- envsubst
+- aws (x86 version only)
+- helm
