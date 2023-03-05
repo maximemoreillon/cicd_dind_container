@@ -1,3 +1,4 @@
+# TODO: use newer version of docker image
 FROM docker:19.03.12-dind
 
 # AWS CLI
@@ -50,3 +51,6 @@ RUN apk add gettext
 
 # git
 RUN apk add git
+
+# Helm
+RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
