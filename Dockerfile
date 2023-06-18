@@ -1,5 +1,4 @@
-# TODO: use newer version of docker image
-FROM docker:19.03.12-dind
+FROM docker:20.10.18-dind
 
 # AWS CLI
 ENV GLIBC_VER=2.34-r0
