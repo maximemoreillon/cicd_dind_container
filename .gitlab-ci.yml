@@ -3,7 +3,7 @@ stages:
 
 variables:
   CONTAINER_IMAGE: ${DOCKER_HUB_USERNAME}/ci-dind
-  CONTAINER_TAG: ${CI_COMMIT_SHORT_SHA}
+  CONTAINER_TAG: ${CI_COMMIT_TAG}
   CONTAINER_IMAGE_TAGGED: ${CONTAINER_IMAGE}:${CONTAINER_TAG}
   CONTAINER_IMAGE_AARCH64: ${CONTAINER_IMAGE}:aarch64
   CONTAINER_IMAGE_AARCH64_TAGGED: ${CONTAINER_IMAGE}:aarch64-${CONTAINER_TAG}
@@ -15,6 +15,8 @@ services:
 
 build:
   stage: build
+  only:
+    - tags
   tags:
     - dind
   before_script:
@@ -27,6 +29,8 @@ build:
 
 build-aarch64:
   stage: build
+  only:
+    - tags
   tags:
     - aarch64
   before_script:
