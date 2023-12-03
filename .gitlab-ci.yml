@@ -11,7 +11,7 @@ variables:
 # The image uses itself to build itself
 image: moreillon/ci-dind
 services:
-  - name: docker:19.03.12-dind
+  - name: docker:24.0.7-dind
 
 build:
   stage: build
