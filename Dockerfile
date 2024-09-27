@@ -53,3 +53,6 @@ RUN apk add git
 
 # Helm
 RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# jq
+RUN apk add jq
